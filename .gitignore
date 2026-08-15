@@ -1,0 +1,5 @@
+# LinkedIn export output (personal data - never commit)
+linkedin_resume.json
+linkedin_raw.json
+/out/
+.env
