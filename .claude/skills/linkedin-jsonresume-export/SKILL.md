@@ -32,7 +32,7 @@ scraping, and not LinkedIn's general-purpose "Sign In / Share" APIs.
 ## Usage
 
 ```bash
-# Default: fetch the CV-relevant domains and write linkedin_resume.json
+# Default: fetch the CV-relevant domains and write temp/linkedin_resume.json
 python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py
 
 # Only specific domains
@@ -44,13 +44,17 @@ python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile
 
 # Custom output path, and also keep the untrimmed raw LinkedIn data
 python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py \
-  --output out/resume.json --save-raw out/linkedin_raw.json
+  --output temp/resume.json --save-raw temp/linkedin_raw.json
 
 # Re-run just the JSON Resume mapping from a previously saved raw dump
 # (no network call — fast iteration while tuning field mappings)
 python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py \
-  --from-raw out/linkedin_raw.json --output out/resume.json
+  --from-raw temp/linkedin_raw.json --output temp/resume.json
 ```
+
+All output paths (`--output`, `--save-raw`) are created automatically if their directory
+doesn't exist yet, and default to living under `temp/` at the repo root, which is
+gitignored — keeping downloaded LinkedIn data out of the repo root and out of git.
 
 By default the script fetches the domains useful for building a CV/resume:
 `PROFILE, POSITIONS, EDUCATION, SKILLS, CERTIFICATIONS, HONORS, LANGUAGES, PROJECTS,
@@ -103,5 +107,5 @@ write the corrected values back into the output file, e.g. `čeština` → `Czec
 ## Security
 
 - The script never prints the access token or the `Authorization` header.
-- Exported profile data is personal data — the default output paths
-  (`linkedin_resume.json`, raw dump files) are gitignored. Don't commit real exports.
+- Exported profile data is personal data — the default output paths live under `temp/`
+  at the repo root, which is gitignored. Don't commit real exports.

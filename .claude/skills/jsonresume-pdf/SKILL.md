@@ -12,10 +12,11 @@ Takes two parameters:
   doesn't exist, say so and offer to run the `jsonresume-theme-template` skill to create it
   first, rather than guessing a substitute.
 - **resume JSON path** — path to a [JSON Resume](https://jsonresume.org/schema)-compatible
-  file (e.g. `resume.json`). It must parse as JSON and have at least a `basics` object.
+  file. It must parse as JSON and have at least a `basics` object. Defaults to
+  `temp/linkedin_resume.json` unless the user specifies otherwise.
 
-Output: a PDF file. Default the output path to `<repo-root>/<slugified-name>-<theme>.pdf`
-(e.g. `petr-koutny-even.pdf`) unless the user specifies otherwise.
+Output: a PDF file. Always write it to `<repo-root>/temp/<slugified-name>-<theme>.pdf`
+(e.g. `temp/petr-koutny-even.pdf`), creating the `temp/` folder if it doesn't exist yet.
 
 ## Process
 
@@ -97,10 +98,11 @@ once:
 cd .claude/skills/jsonresume-pdf/scripts && npm install
 ```
 
-Then render, from the repo root:
+Then render, from the repo root (creating `temp/` first if needed):
 
 ```bash
-node .claude/skills/jsonresume-pdf/scripts/html_to_pdf.js <path-to-populated-html> <output-pdf-path>
+mkdir -p temp
+node .claude/skills/jsonresume-pdf/scripts/html_to_pdf.js <path-to-populated-html> temp/<slugified-name>-<theme>.pdf
 ```
 
 This launches headless Chromium, loads the HTML by `file://` URL, and prints it to A4 with

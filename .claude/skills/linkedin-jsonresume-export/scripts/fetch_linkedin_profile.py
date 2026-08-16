@@ -382,6 +382,12 @@ def build_json_resume(records_by_domain):
     return resume
 
 
+def ensure_parent_dir(path):
+    parent = os.path.dirname(path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Export a LinkedIn member's profile data to a JSON Resume file via "
@@ -396,7 +402,7 @@ def parse_args():
         help="Fetch every documented snapshot domain instead of the default set.",
     )
     parser.add_argument(
-        "--output", default="linkedin_resume.json",
+        "--output", default="temp/linkedin_resume.json",
         help="Where to write the JSON Resume document (default: %(default)s).",
     )
     parser.add_argument(
@@ -445,12 +451,14 @@ def main():
                 return 1
 
         if args.save_raw:
+            ensure_parent_dir(args.save_raw)
             with open(args.save_raw, "w", encoding="utf-8") as handle:
                 json.dump(records_by_domain, handle, indent=2, ensure_ascii=False)
             print(f"Saved raw snapshot data to {args.save_raw}", file=sys.stderr)
 
     resume = build_json_resume(records_by_domain)
 
+    ensure_parent_dir(args.output)
     with open(args.output, "w", encoding="utf-8") as handle:
         json.dump(resume, handle, indent=2, ensure_ascii=False)
 
