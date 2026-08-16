@@ -361,6 +361,9 @@ def build_json_resume(records_by_domain):
         basics["email"] = email
     if phone := map_phone(records_by_domain.get("PHONE_NUMBERS")):
         basics["phone"] = phone
+    # LinkedIn's Member Data Portability API has no profile-photo field; point at the
+    # repo's manually-maintained photo instead (see jsonresume-pdf skill for the convention).
+    basics["image"] = "profile_photo.jpg"
     if basics:
         resume["basics"] = basics
 

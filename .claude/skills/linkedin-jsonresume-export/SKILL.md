@@ -69,6 +69,11 @@ IDs/URNs, recommendation status metadata, and the entire long tail of non-CV dom
 dropped, not stuffed into a custom extension field. If you want the untrimmed data too,
 pass `--save-raw`.
 
+LinkedIn's Member Snapshot API has no profile-photo field, so the script always sets
+`basics.image` to `"profile_photo.jpg"` regardless of what LinkedIn returns — this
+matches the repo's convention (see the `jsonresume-pdf` skill) of keeping a
+`profile_photo.jpg` file at the repo root for themes to pick up.
+
 ## Post-processing
 
 LinkedIn reports `languages[].language` names in the account's own LinkedIn UI locale

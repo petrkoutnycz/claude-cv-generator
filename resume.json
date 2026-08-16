@@ -1,0 +1,290 @@
+{
+  "$schema": "https://jsonresume.org/schema",
+  "basics": {
+    "name": "Petr Koutný",
+    "label": "Staff Backend Engineer | ex-Mews | .NET, Azure, Cloud, Temporal.io, System Design, Event-driven Architecture",
+    "image": "profile_photo.jpg",
+    "email": "me@petrkoutny.cz",
+    "phone": "+420 739 033 817",
+    "summary": "Pragmatic software engineer with 20+ years of experience designing and evolving complex distributed systems, primarily on the Microsoft technology stack. I enjoy turning ideas into working prototypes to validate assumptions quickly, and I strongly believe AI-assisted development is transforming the way we build software by dramatically accelerating experimentation and delivery.Areas I've focused on in recent years include:- Designing and implementing event-driven architectures with Azure Event Hubs, Azure Service Bus, and Kafka.- Building resilient long-running workflows and orchestrations with Temporal.- Facilitating domain-driven design across multiple teams to discover the best solutions for complex FinTech challenges.",
+    "location": {
+      "region": "Brno, Jihomoravský, Česko"
+    }
+  },
+  "work": [
+    {
+      "name": "Mews",
+      "position": "Staff Backend Engineer",
+      "summary": "I started in the Connectivity tribe, where I primarily supported the Distribution team responsible for integrations with Online Travel Agencies (OTAs). My work focused on solving concurrency and performance challenges. Besides that, I contributed to the design of a new webhook platform that has been always a core integration mechanism across the PMS.  Then I spent most of my time at Mews in the FinTech tribe, where I had the opportunity to work across a broad range of technical and architectural challenges. My work ranged from collaborative domain design with multiple teams to solving concurrency issues in a monolithic codebase and developing shared libraries adopted across the company. A significant focus was enabling event-driven architecture using Azure Event Hubs, Azure Service Bus, Kafka, and CloudEvents.  I also introduced Temporal into our technology stack, building the initial prototypes and laying the groundwork for broader adoption. This included establishing observability, integrating with Microsoft Entra ID and its permission model, and helping engineering teams adopt the platform effectively and apply the right orchestration patterns.  Over the past year, I was heavily involved in the rollout of Coralogix as our new observability platform. This required gaining deeper expertise in OpenTelemetry, helping teams instrument their services correctly, build meaningful dashboards, and make better use of telemetry data for monitoring and troubleshooting.",
+      "startDate": "2022-06",
+      "endDate": "2026-07"
+    },
+    {
+      "name": "ORIFLAME SOFTWARE",
+      "position": "Technical Lead & AI Developer",
+      "summary": "The core of my work at Oriflame was contributing to the development of a new machine learning engine for catalogue design. I implemented a machine learning algorithm in F# that evaluated the quality and sales potential of automatically generated catalogues, helping optimize their effectiveness before publication.",
+      "startDate": "2020-07",
+      "endDate": "2022-05"
+    },
+    {
+      "name": "SolarWinds",
+      "position": "Technical Lead Developer",
+      "startDate": "2016-03",
+      "endDate": "2021-05"
+    },
+    {
+      "name": "Unicorn",
+      "position": "Programátor",
+      "startDate": "2016",
+      "endDate": "2016"
+    },
+    {
+      "name": "EASIT s.r.o.",
+      "position": "Senior programátor",
+      "summary": "Rozvoj sázkového systému SYNOT.",
+      "startDate": "2015-09",
+      "endDate": "2015-10"
+    },
+    {
+      "name": "Riganti s.r.o.",
+      "position": "Senior programátor",
+      "summary": "Vývoj webových aplikací na míru.",
+      "startDate": "2012-11",
+      "endDate": "2015-08"
+    },
+    {
+      "name": "W.D.A. Czech, s.r.o.",
+      "position": "Webový vývojář",
+      "summary": "Vývoj frontendově orientovaných webových aplikací na platformě ASP.NET.",
+      "startDate": "2005-07",
+      "endDate": "2013-08"
+    }
+  ],
+  "education": [
+    {
+      "institution": "FI MUNI",
+      "studyType": "Bakalář (Bc.)",
+      "startDate": "2004",
+      "endDate": "2008"
+    },
+    {
+      "institution": "SPŠ Šumperk",
+      "startDate": "2000",
+      "endDate": "2004"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Software Observability"
+    },
+    {
+      "name": "Application Programming Interfaces (API)"
+    },
+    {
+      "name": "Domain Driven Design"
+    },
+    {
+      "name": "Distributed Systems"
+    },
+    {
+      "name": "Temporal.io"
+    },
+    {
+      "name": "Azure Service Bus"
+    },
+    {
+      "name": "Distribuované systémy"
+    },
+    {
+      "name": "Claude Code"
+    },
+    {
+      "name": "Azure Event Hubs"
+    },
+    {
+      "name": "Design softwaru"
+    },
+    {
+      "name": "Visual Studio"
+    },
+    {
+      "name": "ASP.NET Web API"
+    },
+    {
+      "name": "SQL"
+    },
+    {
+      "name": "C#"
+    },
+    {
+      "name": "Software Development"
+    },
+    {
+      "name": "CSS"
+    },
+    {
+      "name": "JavaScript"
+    },
+    {
+      "name": "Project Management"
+    },
+    {
+      "name": "XML"
+    },
+    {
+      "name": "Microsoft SQL Server"
+    },
+    {
+      "name": ".NET"
+    },
+    {
+      "name": "KnockoutJS"
+    },
+    {
+      "name": "Kendo"
+    },
+    {
+      "name": "jQuery"
+    },
+    {
+      "name": "ASP.NET AJAX"
+    },
+    {
+      "name": "ASP.NET MVC"
+    },
+    {
+      "name": "AngularJS"
+    },
+    {
+      "name": "Clean code"
+    },
+    {
+      "name": "IoC"
+    },
+    {
+      "name": "Software Design Patterns"
+    },
+    {
+      "name": "SignalR"
+    },
+    {
+      "name": "ReSharper"
+    },
+    {
+      "name": "SpecFlow"
+    },
+    {
+      "name": "Selenium"
+    },
+    {
+      "name": "PostSharp"
+    },
+    {
+      "name": "TeamCity"
+    },
+    {
+      "name": "TPL dataflow"
+    },
+    {
+      "name": "Angular Command Line Interface (CLI)"
+    },
+    {
+      "name": "TypeScript"
+    },
+    {
+      "name": "Node.js"
+    },
+    {
+      "name": "Akka .NET"
+    },
+    {
+      "name": "F#"
+    },
+    {
+      "name": "Differential Evolution"
+    },
+    {
+      "name": "Rider"
+    },
+    {
+      "name": "Microsoft Azure Machine Learning"
+    },
+    {
+      "name": "Python"
+    },
+    {
+      "name": "Počítačové vidění"
+    },
+    {
+      "name": "AutoKeras"
+    },
+    {
+      "name": "Svelte"
+    },
+    {
+      "name": "ASP.NET"
+    },
+    {
+      "name": "Webové aplikace"
+    },
+    {
+      "name": "T-SQL"
+    },
+    {
+      "name": "Git"
+    },
+    {
+      "name": "Terraform"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "JLPT N5",
+      "date": "2019-01"
+    }
+  ],
+  "languages": [
+    {
+      "language": "Czech",
+      "fluency": "Native or bilingual proficiency"
+    },
+    {
+      "language": "English",
+      "fluency": "Professional working proficiency"
+    },
+    {
+      "language": "Japanese",
+      "fluency": "Elementary proficiency"
+    }
+  ],
+  "references": [
+    {
+      "reference": "I worked with Petr for 3+ years at Mews, where he was operating as Staff engineer across our whole FinTech tribe. I learned a ton just from watching him work up close on things like introducing durable workflows with Temporal, domain decomposition with DDD and eventing. Over his time at Mews, you could clearly see the technical bar go up. He's analytical, has strong well-formed opinions, and pushed hard to make sure features were built with scalability and maintainability in mind. I'd work with him again anytime :) ",
+      "name": "David Le - Senior Backend Engineer | Fintech | Payment experiences"
+    },
+    {
+      "reference": "Petr is a super star engineer. He works well under pressure, he produces quality changes and he challenges the status quo. At a personal and professional level he treated me like a peer, asking questions in my domain areas and challenging decisions, suggesting improvements and bettering the overall end products. This is truly what you want out of a staff engineer - high level planning, hands on when needed and a balanced challenging of expertise.  Anyone working with Petr is very lucky and I'd love to work with him again one day - I'd highly recommend Petr.",
+      "name": "Ben Wilson - Product Builder"
+    },
+    {
+      "reference": "Petr reported to me during some of his years at Mews, and he's the kind of Staff engineer every organization wants: the one whose work everyone else quietly builds on. He created our event-driven backbone, first the Kafka building block and the company-wide event schema standard, then its successor on Azure Event Hubs, and he never stopped at the design: he wrote the guidance, built the local developer tooling, migrated the first services himself and helped teams adopt the platform.  Two things stood out from the manager's seat. When incidents hit the platform layer, Petr was routinely the first to find the root cause, calmly and fast. And he multiplied others: standards, quickstart docs, talks and patient enablement meant teams improved because he was around, not just because he shipped.  His departure was purely the result of an organizational restructure, nothing to do with performance. I'd hire him again, and I'm happy to be a reference.",
+      "name": "Magnus Lenngren - Principal Engineer"
+    },
+    {
+      "reference": "I worked with Petr on multiple org-wide initiatives solving domain decomposition, introducing distributed systems coordination (laying foundations of event-driven architecture, durable workflows) and observability (adopting OpenTelemetry). Petr can find simple solutions to complex problems, coordinate changes across multiple teams, and upskill them. He targets root causes and focuses on system reliability while keeping the work fun in the process. Any organization would be fortunate to have Petr.",
+      "name": "Honza Břešťan - Senior Staff Software Engineer"
+    },
+    {
+      "reference": "When it comes to complex domains, decomposition, eventing (AeH / Kafka), durable workflows (temporal), or observability (OTEL) Petr is your guy. Can coordinate complex engineering and product challenges across multiple teams and can ensure the system is tuned to be maintainable by agents and humans alike. Petr is no BS and will absolutely level up any product or team he joins.",
+      "name": "Sean Newell - Principal Engineer"
+    },
+    {
+      "reference": "Collaborating with Petr has always been a nice experience. He has deep knowledge of architecture and system design and stays up to date with the latest technologies. He's able to explain complex concepts and encourages others to continue learning. He's not only a skilled engineer but also a friendly and social person, making him a great to work with.",
+      "name": "Matthijs Lanser - Freelance Software Engineer"
+    }
+  ],
+  "meta": {
+    "generator": "linkedin-jsonresume-export",
+    "generatedAt": "2026-08-15T20:58:12Z"
+  }
+}

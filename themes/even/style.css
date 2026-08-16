@@ -1,0 +1,296 @@
+/*
+  Even — a JSON Resume theme template
+  Inspired by the visual language of the "even" theme on the JSON Resume registry
+  (registry.jsonresume.org): a flat, understated design with a narrow date/meta
+  column set beside a wider content column for every entry, a small type scale,
+  minimal border-radius, a single blue accent color, and automatic light/dark
+  palettes via CSS custom properties.
+
+  This file is an original implementation for this project — no code was copied
+  from that theme's package.
+*/
+
+:root {
+  --e-bg: #ffffff;
+  --e-dimmed: #f3f4f5;
+  --e-primary: #191e23;
+  --e-secondary: #6c7781;
+  --e-accent: #0073aa;
+  --e-radius: 0.2em;
+
+  --e-scale-0: 0.875rem;
+  --e-scale-1: 1.05rem;
+  --e-scale-2: 1.3rem;
+  --e-scale-3: 1.6rem;
+  --e-scale-4: 2rem;
+  --e-scale-5: 2.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --e-bg: #191e23;
+    --e-dimmed: #23282d;
+    --e-primary: #fbfbfc;
+    --e-secondary: #ccd0d4;
+    --e-accent: #00a0d2;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--e-bg);
+  color: var(--e-primary);
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: var(--e-scale-0);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--e-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.resume {
+  max-width: 46em;
+  margin: 0 auto;
+  padding: 4em 1.5em;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  display: flex;
+  gap: 1.5em;
+  align-items: flex-start;
+  margin-bottom: 3.5em;
+  padding-bottom: 2.5em;
+  border-bottom: 1px solid var(--e-dimmed);
+}
+
+.avatar {
+  flex: none;
+  width: 5.5em;
+  height: 5.5em;
+  border-radius: 50%;
+  background: var(--e-dimmed);
+  color: var(--e-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  text-align: center;
+  object-fit: cover;
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: var(--e-scale-5);
+  font-weight: 900;
+  margin: 0 0 0.2em;
+  color: var(--e-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.title {
+  font-size: var(--e-scale-2);
+  font-weight: 400;
+  color: var(--e-secondary);
+  margin: 0 0 0.8em;
+}
+
+.meta-list,
+.profile-list {
+  list-style: none;
+  margin: 0 0 0.8em;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.6em;
+  font-size: var(--e-scale-0);
+  color: var(--e-secondary);
+}
+
+.meta-list li:not(:last-child)::after,
+.profile-list li:not(:last-child)::after {
+  content: '\00b7';
+  margin-left: 0.6em;
+  color: var(--e-secondary);
+}
+
+.meta-list a,
+.profile-list a {
+  color: var(--e-secondary);
+}
+
+.meta-list a:hover,
+.profile-list a:hover {
+  color: var(--e-accent);
+}
+
+.summary {
+  margin: 0.8em 0;
+  color: var(--e-primary);
+  max-width: 34em;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  margin-bottom: 3em;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: var(--e-scale-3);
+  font-weight: 700;
+  color: var(--e-secondary);
+  margin: 0 0 1.5em;
+}
+
+/* ---------- Entries (meta column + content column) ---------- */
+
+.entry {
+  display: grid;
+  grid-template-columns: minmax(6em, 10em) minmax(0, 1fr);
+  gap: 0.25em 1.5em;
+  margin-bottom: 2em;
+  align-items: start;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry-meta {
+  font-size: var(--e-scale-0);
+  color: var(--e-secondary);
+  padding-top: 0.2em;
+}
+
+.entry-meta time + time::before {
+  content: none;
+}
+
+.entry-location {
+  margin-top: 0.2em;
+}
+
+.entry-content {
+  min-width: 0;
+}
+
+.entry-title {
+  font-size: var(--e-scale-1);
+  font-weight: 700;
+  margin: 0 0 0.2em;
+  color: var(--e-primary);
+}
+
+.entry-title a {
+  color: inherit;
+}
+
+.entry-subtitle {
+  font-size: var(--e-scale-0);
+  color: var(--e-secondary);
+  margin-bottom: 0.6em;
+}
+
+.entry-desc {
+  margin: 0.6em 0;
+}
+
+.entry-list {
+  margin: 0.6em 0 0;
+  padding-left: 1.2em;
+}
+
+.entry-list li {
+  margin-bottom: 0.4em;
+}
+
+.quote {
+  font-style: italic;
+  margin: 0 0 0.4em;
+}
+
+/* ---------- Tags (skills / languages / interests) ---------- */
+
+.tag-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.tag {
+  font-size: var(--e-scale-0);
+  padding: 0.25em 0.7em;
+  background: var(--e-dimmed);
+  color: var(--e-primary);
+  border-radius: var(--e-radius);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 36em) {
+  .resume {
+    padding: 2.5em 1.25em;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+  }
+
+  .name {
+    font-size: var(--e-scale-4);
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 0.3em;
+  }
+
+  .entry-meta {
+    padding-top: 0;
+  }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  body {
+    background: #fff;
+    color: #191e23;
+  }
+
+  .section {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}

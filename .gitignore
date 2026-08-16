@@ -3,3 +3,6 @@ linkedin_resume.json
 linkedin_raw.json
 /out/
 .env
+.DS_Store
+node_modules/
+temp
