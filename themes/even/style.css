@@ -285,8 +285,13 @@ a:hover {
     color: #191e23;
   }
 
-  .section {
+  .section-title {
+    break-after: avoid-page;
+  }
+
+  .entry {
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   a {

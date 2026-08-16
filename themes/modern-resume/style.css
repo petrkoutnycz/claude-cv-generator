@@ -440,11 +440,15 @@ a.contact-value:hover {
     print-color-adjust: exact;
   }
 
-  .section {
-    page-break-inside: avoid;
+  .section-title {
+    break-after: avoid-page;
   }
 
-  .timeline-item {
+  .timeline-item,
+  .portfolio-item,
+  .simple-item,
+  .skill-item {
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 }

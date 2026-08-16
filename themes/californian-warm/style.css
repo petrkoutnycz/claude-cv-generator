@@ -59,7 +59,7 @@ body {
 /* ---------- Header ---------- */
 
 .header {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   padding: 40px;
   background: linear-gradient(135deg, var(--cw-header-from) 0%, var(--cw-header-to) 100%);
   border-radius: var(--cw-radius-lg);
@@ -124,7 +124,7 @@ body {
 /* ---------- Sections ---------- */
 
 .section {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .section:last-child {
@@ -381,8 +381,15 @@ body {
     transform: none;
   }
 
-  .section {
+  .section-title {
+    break-after: avoid-page;
+  }
+
+  .entry-card,
+  .skill-group,
+  .simple-card {
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .contact-list a {

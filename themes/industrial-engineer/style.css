@@ -1,0 +1,524 @@
+/*
+  Industrial Engineer — a JSON Resume theme template
+  Inspired by the visual language of the "industrial-engineer" theme on the
+  JSON Resume registry (registry.jsonresume.org): an engineering-datasheet
+  aesthetic with a precise grid, monospace technical labels, a spec-table
+  contact block, numbered part-number section headers, and dimension-line
+  rules — drafting-blue with safety-orange accents.
+
+  This file is an original implementation for this project — no code was
+  copied from that theme's package.
+*/
+
+:root {
+  --ie-navy-darkest: #0e1c29;
+  --ie-navy-dark: #16202b;
+  --ie-navy: #1b3a5b;
+  --ie-slate: #2c3845;
+  --ie-blue: #2f5d8a;
+  --ie-text-muted: #5d6b78;
+  --ie-border-light: #b9cee0;
+  --ie-border: #d4dde4;
+  --ie-bg-tint: #eef4f9;
+  --ie-bg-page: #f4f6f8;
+  --ie-orange: #f2954f;
+  --ie-orange-dark: #d6480b;
+  --ie-white: #ffffff;
+
+  --ie-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  --ie-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ie-bg-page);
+  color: var(--ie-slate);
+  font-family: var(--ie-sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.resume {
+  max-width: 840px;
+  margin: 40px auto;
+  background: var(--ie-white);
+  border: 1px solid var(--ie-border);
+  box-shadow: 0 1px 3px rgba(14, 28, 41, 0.08);
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  position: relative;
+  background: var(--ie-navy);
+  color: var(--ie-white);
+  padding: 24px 40px 28px;
+}
+
+.header::before,
+.header::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  background: var(--ie-orange);
+}
+
+.header::before {
+  left: 8px;
+}
+
+.header::after {
+  right: 8px;
+}
+
+.doc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+  font-family: var(--ie-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ie-orange);
+}
+
+.doc-tag::before {
+  content: '\25A0';
+  font-size: 8px;
+  margin-right: 6px;
+  color: var(--ie-orange);
+  position: relative;
+  top: -2px;
+}
+
+.doc-value {
+  color: var(--ie-white);
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.avatar {
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border: 1px solid var(--ie-border-light);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ie-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ie-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  object-fit: cover;
+}
+
+.name {
+  font-family: var(--ie-mono);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ie-border-light);
+}
+
+/* ---------- Contact spec-table ---------- */
+
+.contact-table {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  border-top: 1px solid var(--ie-border);
+  border-left: 1px solid var(--ie-border);
+}
+
+.spec-cell {
+  padding: 12px 20px;
+  border-right: 1px solid var(--ie-border);
+  border-bottom: 1px solid var(--ie-border);
+}
+
+.spec-label {
+  font-family: var(--ie-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ie-text-muted);
+  margin-bottom: 4px;
+}
+
+.spec-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ie-slate);
+  word-break: break-word;
+}
+
+.spec-value a {
+  color: var(--ie-blue);
+  text-decoration: none;
+}
+
+.spec-value a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Note box (summary / reference quotes) ---------- */
+
+.note-box {
+  position: relative;
+  margin: 28px 40px;
+  padding: 22px 22px 18px;
+  border: 1px dashed var(--ie-border-light);
+  background: var(--ie-bg-tint);
+}
+
+.note-label {
+  position: absolute;
+  top: -9px;
+  left: 16px;
+  padding: 0 8px;
+  background: var(--ie-white);
+  font-family: var(--ie-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ie-blue);
+}
+
+.note-box p {
+  margin: 0;
+  color: var(--ie-slate);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.note-box .quote {
+  font-style: italic;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding: 0 40px;
+  margin-bottom: 30px;
+}
+
+.section:last-child {
+  margin-bottom: 40px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.section-num {
+  flex: none;
+  background: var(--ie-orange-dark);
+  color: var(--ie-white);
+  font-family: var(--ie-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 7px;
+}
+
+.section-title {
+  font-family: var(--ie-mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ie-navy);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--ie-border-light);
+  position: relative;
+}
+
+.section-rule::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: var(--ie-border-light);
+}
+
+/* ---------- Entries (experience / education / projects / awards / etc.) ---------- */
+
+.entry {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--ie-border);
+}
+
+.entry:last-child {
+  border-bottom: none;
+  padding-bottom: 4px;
+}
+
+.entry-meta {
+  border-left: 2px solid var(--ie-blue);
+  padding-left: 12px;
+}
+
+.entry-date {
+  font-family: var(--ie-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ie-blue);
+  line-height: 1.4;
+}
+
+.entry-date .date-start,
+.entry-date .date-until {
+  display: block;
+}
+
+.entry-date .date-until {
+  font-weight: 500;
+  color: var(--ie-text-muted);
+  margin-top: 2px;
+}
+
+.entry-date .date-duration {
+  display: block;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dotted var(--ie-border-light);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ie-orange-dark);
+}
+
+.entry-location {
+  font-family: var(--ie-mono);
+  font-size: 11px;
+  color: var(--ie-text-muted);
+  margin-top: 4px;
+}
+
+.entry-title {
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--ie-border-light);
+  text-underline-offset: 3px;
+  color: var(--ie-navy);
+  margin: 0 0 4px;
+}
+
+.entry-title a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.entry-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ie-blue);
+  margin-bottom: 8px;
+}
+
+.entry-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ie-slate);
+  margin: 0 0 10px;
+}
+
+.entry-list {
+  margin: 0;
+  padding-left: 18px;
+  list-style: none;
+}
+
+.entry-list li {
+  position: relative;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ie-slate);
+  margin-bottom: 6px;
+}
+
+.entry-list li::before {
+  content: '\25AA';
+  position: absolute;
+  left: -18px;
+  top: 1px;
+  font-size: 10px;
+  color: var(--ie-orange-dark);
+}
+
+/* ---------- Skills ---------- */
+
+.skill-group {
+  margin-bottom: 16px;
+}
+
+.skill-group:last-child {
+  margin-bottom: 0;
+}
+
+.skill-label {
+  font-family: var(--ie-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ie-text-muted);
+  margin-bottom: 10px;
+}
+
+/* ---------- Tags (skills / languages / interests) ---------- */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  font-family: var(--ie-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ie-navy);
+  background: var(--ie-bg-tint);
+  border: 1px solid var(--ie-border-light);
+  padding: 5px 10px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .resume {
+    margin: 0;
+    border: none;
+  }
+
+  .header {
+    padding: 20px 20px 24px;
+  }
+
+  .header-main {
+    gap: 16px;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .spec-cell {
+    padding: 10px 16px;
+  }
+
+  .note-box {
+    margin: 20px;
+    padding: 18px 16px 14px;
+  }
+
+  .section {
+    padding: 0 20px;
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .entry-meta {
+    border-left: none;
+    border-top: 2px solid var(--ie-blue);
+    padding-left: 0;
+    padding-top: 6px;
+  }
+
+  .section-title {
+    white-space: normal;
+  }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  body {
+    background: var(--ie-white);
+  }
+
+  .resume {
+    margin: 0;
+    max-width: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .header {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .section-num,
+  .tag {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .entry-title,
+  .entry-subtitle {
+    break-after: avoid;
+  }
+
+  .entry-desc,
+  .entry-list li {
+    break-inside: avoid;
+  }
+
+  .section-header {
+    break-after: avoid-page;
+  }
+}

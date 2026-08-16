@@ -52,6 +52,13 @@ Rules to follow while populating:
   the same for optional single fields with no data (e.g. `basics.url`, `basics.phone`).
 - **Dates**: format as the template implies (e.g. `Jan 2022`), and use "Present" for a
   `work`/`volunteer` entry with no `endDate`.
+- **Duration** (only if the theme's date markup has a dedicated duration element, e.g.
+  `.date-duration` in `industrial-engineer`): compute it from `startDate`/`endDate` — using
+  today's date when `endDate` is absent — with inclusive month counting:
+  `months = (endYear*12 + endMonth) - (startYear*12 + startMonth) + 1`, then
+  `years = months // 12`, `remainder = months % 12`. Format as `"X yrs Y mos"`, dropping
+  whichever part is zero (`"X yrs"` or `"Y mos"` alone), and singularize the unit when it
+  equals 1 (`"1 yr"`, `"1 mo"`).
 - **Escape HTML**: escape `&`, `<`, `>` in every inserted text value.
 - **Long text fields** (`basics.summary`, `work[].summary`): use judgment to fit the
   template's structure — e.g. split into an intro sentence plus a bullet list if the source
