@@ -20,11 +20,24 @@ scraping, and not LinkedIn's general-purpose "Sign In / Share" APIs.
 2. An OAuth access token already obtained via the Authorization Code flow, with scope
    `r_dma_portability_3rd_party` (app acting on behalf of a member) or
    `r_dma_portability_member` (member downloading their own data). **Obtaining that
-   token is out of scope for this skill** — get one first, then export it:
+   token is out of scope for this skill** — get one first, then make it available to
+   the script one of two ways:
 
-   ```bash
-   export LINKEDIN_ACCESS_TOKEN="<token>"
-   ```
+   - Add it to the repo-root `.env` file (preferred — gitignored, persists across
+     runs):
+
+     ```
+     LINKEDIN_ACCESS_TOKEN=<token>
+     ```
+
+     The script loads this file automatically before checking for the token.
+
+   - Or export it in the shell for a one-off run (e.g. a different token in CI); an
+     exported value always takes precedence over `.env`:
+
+     ```bash
+     export LINKEDIN_ACCESS_TOKEN="<token>"
+     ```
 
 3. Only members located in the **EU/EEA or Switzerland** can consent to share their data
    this way — this is a LinkedIn platform restriction, not a limitation of the script.
@@ -73,24 +86,38 @@ IDs/URNs, recommendation status metadata, and the entire long tail of non-CV dom
 dropped, not stuffed into a custom extension field. If you want the untrimmed data too,
 pass `--save-raw`.
 
-LinkedIn's Member Snapshot API has no profile-photo field, so the script always sets
-`basics.image` to `"profile_photo.jpg"` regardless of what LinkedIn returns — this
-matches the repo's convention (see the `jsonresume-pdf` skill) of keeping a
-`profile_photo.jpg` file at the repo root for themes to pick up.
+LinkedIn's Member Snapshot API has no profile-photo field, so the script instead checks
+whether a `profile_photo.jpg` file exists at the repo root — this matches the repo's
+convention (see the `jsonresume-pdf` skill) of keeping a manually-maintained photo there
+for themes to pick up. If found, `basics.image` is set to `"profile_photo.jpg"`; if not,
+`basics.image` is left unset rather than pointing at a nonexistent file.
 
 ## Post-processing
 
-LinkedIn reports `languages[].language` names in the account's own LinkedIn UI locale
-(e.g. Czech `čeština`, `angličtina`, `japonština`), not necessarily English — the script
-passes these through unchanged, with no translation logic and no LLM API call. After
-generating the output file, translate each `language` value to its English name yourself
-(you're the agent running this skill, so no extra API key or dependency is needed) and
-write the corrected values back into the output file, e.g. `čeština` → `Czech`,
-`angličtina` → `English`, `japonština` → `Japanese`.
+LinkedIn reports several fields in the account's own LinkedIn UI locale, not necessarily
+English — the script passes these through unchanged, with no translation logic and no
+LLM API call. After generating the output file, translate each of the following fields
+to English yourself (you're the agent running this skill, so no extra API key or
+dependency is needed) and write the corrected values back into the output file:
+
+- `languages[].language` — e.g. Czech `čeština` → `Czech`, `angličtina` → `English`,
+  `japonština` → `Japanese`.
+- `languages[].fluency` — LinkedIn's proficiency levels, e.g. `Rodilý mluvčí nebo
+  dvojjazyčná znalost` → `Native or bilingual proficiency`.
+- `basics.location.region` — a free-text city/country string LinkedIn builds from the
+  member's `Geo Location`/`Location` field, e.g. `Praha, Česko` → `Prague, Czech
+  Republic`.
+
+This only covers fields LinkedIn itself generates in the account's UI locale. Leave
+everything the member typed themselves untouched — job/position titles, company names,
+summaries, descriptions, degree names, project names, etc. — even if it contains
+non-English words; that's the person's own wording, not a LinkedIn UI artifact, and
+translating it would change the resume's actual content.
 
 ## Troubleshooting
 
-- **`LINKEDIN_ACCESS_TOKEN is not set`** — export the token before running (see
+- **`LINKEDIN_ACCESS_TOKEN is not set`** — the script checks the shell environment and
+  then the repo-root `.env` file; set the token in one of those before running (see
   Prerequisites). The script fails fast here rather than making a request.
 - **`401` / `403`** — the token is missing/expired, lacks the
   `r_dma_portability_3rd_party` / `r_dma_portability_member` scope, or the member hasn't

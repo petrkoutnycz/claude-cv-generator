@@ -16,9 +16,10 @@ scripts for the parts that must be deterministic (network calls, PDF rendering).
    Snapshot API (`fetch_linkedin_profile.py`) and maps it into a JSON Resume document at
    `temp/linkedin_resume.json`. Requires `LINKEDIN_ACCESS_TOKEN` in `.env` (Prerequisites
    in the README). Only EU/EEA/Switzerland members can consent to this data-portability
-   flow. After running, the agent must manually translate `languages[].language` values
-   to English (LinkedIn returns them in the account's UI locale) — this is intentionally
-   done as an agent post-processing step, not scripted or API-driven.
+   flow. After running, the agent must manually translate the fields LinkedIn returns in
+   the account's UI locale (language names, proficiency levels, the location string) to
+   English — this is intentionally done as an agent post-processing step, not scripted
+   or API-driven.
 2. **`jsonresume-theme-template`** — given a theme name from the
    [JSON Resume registry](https://jsonresume.org/themes), fetches visual reference
    material (README, screenshots, style files) via `fetch_theme_reference.py` using
@@ -93,6 +94,7 @@ HTML/PDF and visually checking it.
   should never be committed — keep it under `temp/`.
 - **`profile_photo.jpg`** at the repo root is the one piece of personal data checked
   into the working tree (not committed — see `.gitignore`); resume JSON's `basics.image`
-  is expected to point at it, and the LinkedIn export script always sets it to that
-  fixed filename since LinkedIn's API has no photo field.
+  is expected to point at it, and the LinkedIn export script sets it to that fixed
+  filename whenever the file is present at the repo root (LinkedIn's API has no photo
+  field of its own), leaving `basics.image` unset otherwise.
 - **`.env`** holds `LINKEDIN_ACCESS_TOKEN`, required only for the LinkedIn export skill.

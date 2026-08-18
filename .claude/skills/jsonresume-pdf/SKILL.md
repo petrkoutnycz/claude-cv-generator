@@ -74,10 +74,23 @@ Rules to follow while populating:
   (e.g. `californian-warm` has no avatar element at all, so photos never apply there). When
   both are present, resolve `basics.image`: a local path relative to the resume JSON's
   directory (this repo's `resume.json` sets it to `profile_photo.jpg` at the repo root), or
-  download it first if it's a URL. Replace the placeholder element with an `<img>` using the
-  same class (so the existing avatar circle sizing/`border-radius`/`object-fit: cover`
-  styling applies) and an absolute filesystem path or `file://` URI for `src`, e.g.:
-  `<img class="avatar" src="/Volumes/Sources/petrkoutnycz/claude-cv-generator/profile_photo.jpg" alt="Petr Koutný">`.
+  download it first if it's a URL.
+
+  Before referencing it, downscale it to a print-appropriate size rather than embedding the
+  source file as-is — camera-original photos (multi-megapixel, several MB) get baked into
+  the PDF at full resolution otherwise, since Chromium's print-to-PDF doesn't downsample
+  based on how small the avatar is actually rendered (a 150×150 CSS px circle in most
+  themes), and that alone can bloat a several-page PDF from a few hundred KB to 8+ MB. Resize
+  so the longer edge is ~600px (roughly 2-4x the avatar's CSS display size, plenty for a
+  crisp circular crop) using `sips` (built into macOS, no extra dependency):
+  `sips -Z 600 <resolved-source> --out <scratchpad-dir>/<name>-avatar.jpg`. Save the resized
+  copy next to the populated HTML (a build artifact, not something to commit) and use *that*
+  file's path for `src`, not the original.
+
+  Replace the placeholder element with an `<img>` using the same class (so the existing
+  avatar circle sizing/`border-radius`/`object-fit: cover` styling applies) and an absolute
+  filesystem path or `file://` URI for `src`, e.g.:
+  `<img class="avatar" src="/path/to/scratchpad/petr-koutny-avatar.jpg" alt="Petr Koutný">`.
   A non-square photo will be center-cropped by `object-fit: cover`; if the default crop cuts
   off the subject awkwardly, add an inline `style="object-position: 50% 20%"` (tuned by eye)
   rather than editing the theme's shared CSS.

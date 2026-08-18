@@ -49,6 +49,23 @@ ALL_DOMAINS = [
 DATE_FORMATS = ["%Y-%m-%d", "%b %Y", "%B %Y", "%m/%Y", "%Y-%m", "%Y"]
 
 
+def load_dotenv(path):
+    """Populate os.environ from a simple KEY=VALUE .env file, without overriding
+    variables the shell environment already set."""
+    if not os.path.isfile(path):
+        return
+    with open(path, "r", encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            key = key.strip()
+            value = value.strip().strip("'\"")
+            if key and key not in os.environ:
+                os.environ[key] = value
+
+
 class LinkedInAPIError(RuntimeError):
     def __init__(self, status, body):
         super().__init__(f"LinkedIn API error {status}: {body}")
@@ -353,7 +370,7 @@ SECTION_MAPPERS = {
 }
 
 
-def build_json_resume(records_by_domain):
+def build_json_resume(records_by_domain, has_photo):
     resume = {"$schema": "https://jsonresume.org/schema"}
 
     basics = map_profile(records_by_domain.get("PROFILE", []))
@@ -362,8 +379,10 @@ def build_json_resume(records_by_domain):
     if phone := map_phone(records_by_domain.get("PHONE_NUMBERS")):
         basics["phone"] = phone
     # LinkedIn's Member Data Portability API has no profile-photo field; point at the
-    # repo's manually-maintained photo instead (see jsonresume-pdf skill for the convention).
-    basics["image"] = "profile_photo.jpg"
+    # repo's manually-maintained photo instead (see jsonresume-pdf skill for the
+    # convention), but only if it's actually there to avoid a dangling basics.image.
+    if has_photo:
+        basics["image"] = "profile_photo.jpg"
     if basics:
         resume["basics"] = basics
 
@@ -419,6 +438,10 @@ def parse_args():
 def main():
     args = parse_args()
 
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
+    load_dotenv(os.path.join(repo_root, ".env"))
+    has_photo = os.path.isfile(os.path.join(repo_root, "profile_photo.jpg"))
+
     if args.from_raw:
         with open(args.from_raw, "r", encoding="utf-8") as handle:
             records_by_domain = json.load(handle)
@@ -456,7 +479,7 @@ def main():
                 json.dump(records_by_domain, handle, indent=2, ensure_ascii=False)
             print(f"Saved raw snapshot data to {args.save_raw}", file=sys.stderr)
 
-    resume = build_json_resume(records_by_domain)
+    resume = build_json_resume(records_by_domain, has_photo)
 
     ensure_parent_dir(args.output)
     with open(args.output, "w", encoding="utf-8") as handle:
