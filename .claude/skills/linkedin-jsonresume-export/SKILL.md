@@ -114,7 +114,7 @@ summaries, descriptions, degree names, project names, etc. — even if it contai
 non-English words; that's the person's own wording, not a LinkedIn UI artifact, and
 translating it would change the resume's actual content.
 
-After writing the output file, also check whether `basics.email` and `basics.phone` are
+IMPORTANT: After writing the output file, also check whether `basics.email` and `basics.phone` are
 present and non-empty. For any that are missing, ask the member for the value directly
 (don't guess or invent one) and write it into the output file.
 
