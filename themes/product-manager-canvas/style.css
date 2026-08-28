@@ -1,0 +1,433 @@
+/*
+  Product Manager Canvas — a JSON Resume theme template
+  Inspired by the visual language of the "product-manager-canvas" theme on the
+  JSON Resume registry (registry.jsonresume.org): a clean Notion-like single
+  column on white, neutral Inter-style sans-serif, an indigo accent, quiet
+  hairline-bordered cards, inline metric chips, and clearly labeled "Key Impact"
+  callouts for product work.
+
+  This file is an original implementation for this project — no code was
+  copied from that theme's package.
+*/
+
+:root {
+  --pmc-bg: #ffffff;
+  --pmc-text: #1a1a1a;
+  --pmc-text-secondary: #4a4a4a;
+  --pmc-text-muted: #6b7280;
+  --pmc-accent: #6366f1;
+  --pmc-accent-deep: #4f46e5;
+  --pmc-accent-soft: #eef2ff;
+  --pmc-accent-soft-border: #e0e7ff;
+  --pmc-border: #e5e7eb;
+  --pmc-card-bg: #fafafa;
+  --pmc-tag-bg: #f3f4f6;
+
+  --pmc-radius-lg: 12px;
+  --pmc-radius-md: 8px;
+  --pmc-radius-sm: 4px;
+
+  --pmc-max-width: 720px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--pmc-bg);
+  color: var(--pmc-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.resume {
+  max-width: var(--pmc-max-width);
+  margin: 0 auto;
+  padding: 64px 40px;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header .name {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  color: var(--pmc-text);
+}
+
+.header .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pmc-accent-deep);
+  margin: 0 0 18px;
+}
+
+.contact-list,
+.profile-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+  font-size: 12.5px;
+  color: var(--pmc-text-muted);
+}
+
+.contact-list a,
+.profile-list a {
+  color: var(--pmc-text-muted);
+  text-decoration: none;
+}
+
+.contact-list a:hover,
+.profile-list a:hover {
+  color: var(--pmc-accent-deep);
+  text-decoration: underline;
+}
+
+.profile-list {
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+
+.profile-list a {
+  color: var(--pmc-accent-deep);
+}
+
+.header .summary {
+  text-align: left;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--pmc-text-secondary);
+  margin: 0;
+  padding: 18px 22px;
+  background: var(--pmc-accent-soft);
+  border: 1px solid var(--pmc-accent-soft-border);
+  border-left: 3px solid var(--pmc-accent);
+  border-radius: var(--pmc-radius-md);
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  margin-bottom: 32px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pmc-text);
+  margin: 0 0 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--pmc-border);
+}
+
+/* ---------- Entry cards ---------- */
+
+.entry-card {
+  margin-bottom: 16px;
+  padding: 22px 24px;
+  background: var(--pmc-card-bg);
+  border: 1px solid var(--pmc-border);
+  border-radius: var(--pmc-radius-md);
+}
+
+.entry-card:last-child {
+  margin-bottom: 0;
+}
+
+.entry-card.compact {
+  padding: 18px 20px;
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.entry-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--pmc-text);
+  flex: 1;
+  min-width: 200px;
+}
+
+.entry-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.entry-title a:hover {
+  text-decoration: underline;
+}
+
+.entry-date {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pmc-text-muted);
+  white-space: nowrap;
+}
+
+.entry-subtitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pmc-accent-deep);
+  margin-top: 4px;
+}
+
+.entry-subtitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.entry-subtitle a:hover {
+  text-decoration: underline;
+}
+
+.entry-location {
+  font-size: 12px;
+  color: var(--pmc-text-muted);
+  margin-top: 2px;
+}
+
+.entry-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--pmc-text-secondary);
+  margin: 12px 0 0;
+}
+
+/* ---------- Inline metric chips ---------- */
+
+.metric-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.metric {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 5px 12px;
+  background: var(--pmc-bg);
+  border: 1px solid var(--pmc-border);
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.metric-value {
+  font-weight: 700;
+  color: var(--pmc-accent-deep);
+}
+
+.metric-label {
+  color: var(--pmc-text-muted);
+}
+
+/* ---------- Key Impact callout ---------- */
+
+.impact {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: var(--pmc-bg);
+  border-left: 3px solid var(--pmc-accent);
+  border-radius: var(--pmc-radius-sm);
+}
+
+.impact-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pmc-accent-deep);
+  margin-bottom: 8px;
+}
+
+.impact-list {
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc;
+}
+
+.impact-list li {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--pmc-text-secondary);
+  margin-bottom: 5px;
+}
+
+.impact-list li:last-child {
+  margin-bottom: 0;
+}
+
+.impact-list.bare {
+  margin-top: 12px;
+}
+
+/* ---------- Skills ---------- */
+
+.skill-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skill-group {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.skill-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pmc-text-muted);
+  padding-top: 5px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 11px;
+  background: var(--pmc-tag-bg);
+  color: var(--pmc-text-secondary);
+  border-radius: var(--pmc-radius-sm);
+}
+
+/* ---------- Quote / references ---------- */
+
+.quote {
+  font-size: 13.5px;
+  line-height: 1.7;
+  font-style: italic;
+  color: var(--pmc-text-secondary);
+  margin: 0;
+}
+
+.quote-author {
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pmc-text);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .resume {
+    padding: 40px 20px;
+  }
+
+  .header .name {
+    font-size: 28px;
+  }
+
+  .entry-head {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .skill-group {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .skill-label {
+    padding-top: 0;
+  }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  body {
+    background: #fff;
+    font-size: 11px;
+  }
+
+  .resume {
+    max-width: none;
+    padding: 0;
+  }
+
+  .section {
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    break-after: avoid-page;
+  }
+
+  .entry-card {
+    background: #fff;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 14px 0;
+    border: none;
+    border-bottom: 1px solid var(--pmc-border);
+    border-radius: 0;
+  }
+
+  .entry-card:last-child {
+    border-bottom: none;
+  }
+
+  .header .summary,
+  .metric,
+  .impact {
+    background: #fff;
+  }
+
+  .impact {
+    padding-left: 12px;
+  }
+
+  .contact-list a,
+  .profile-list a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

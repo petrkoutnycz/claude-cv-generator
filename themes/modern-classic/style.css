@@ -1,0 +1,312 @@
+/*
+  Modern Classic — a JSON Resume theme template
+  Inspired by the visual language of the "modern-classic" theme on the
+  JSON Resume registry (registry.jsonresume.org): a professional, timeless
+  single-column layout with humanist sans-serif (Inter) typography, a large
+  near-black name, a saturated blue accent used for links and a section-title
+  underline, flat work entries with a right-aligned date, and light-gray
+  left-bordered cards for skills, languages and interests. Print-optimised
+  and ATS-friendly.
+
+  This file is an original implementation for this project — no code was
+  copied from that theme's package.
+*/
+
+:root {
+  --mc-bg: #ffffff;
+  --mc-heading: #111827;
+  --mc-text: #1f2937;
+  --mc-body: #4b5563;
+  --mc-muted: #6b7280;
+  --mc-accent: #0066cc;
+  --mc-border: #e5e7eb;
+  --mc-surface: #f3f4f6;
+
+  --mc-max-width: 820px;
+  --mc-radius: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--mc-bg);
+  color: var(--mc-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.resume {
+  max-width: var(--mc-max-width);
+  margin: 0 auto;
+  padding: 60px 48px;
+}
+
+a {
+  color: var(--mc-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  margin-bottom: 44px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--mc-border);
+}
+
+.header .name {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--mc-heading);
+  margin: 0 0 8px;
+}
+
+.header .title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--mc-muted);
+  margin: 0 0 18px;
+}
+
+.contact-list,
+.profile-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.contact-list li,
+.profile-list li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.contact-list li:not(:last-child)::after,
+.profile-list li:not(:last-child)::after {
+  content: '•';
+  margin: 0 12px;
+  color: var(--mc-border);
+}
+
+.contact-list span {
+  color: var(--mc-body);
+}
+
+.profile-list {
+  margin-top: 8px;
+}
+
+.header .summary {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--mc-body);
+  margin: 20px 0 0;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  margin-bottom: 36px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--mc-heading);
+  margin: 0 0 22px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--mc-accent);
+}
+
+/* ---------- Entries (experience / projects / volunteer) ---------- */
+
+.entry {
+  margin-bottom: 28px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry--compact {
+  margin-bottom: 20px;
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.entry-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--mc-heading);
+  margin: 0;
+}
+
+.entry-title a {
+  color: var(--mc-heading);
+}
+
+.entry-title a:hover {
+  color: var(--mc-accent);
+}
+
+.entry-org {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--mc-accent);
+  margin-top: 4px;
+}
+
+.entry--compact .entry-org {
+  font-size: 15px;
+  color: var(--mc-body);
+}
+
+.entry-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-muted);
+  white-space: nowrap;
+}
+
+.entry-date--inline {
+  margin-top: 4px;
+}
+
+.entry-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--mc-body);
+  margin: 12px 0 0;
+}
+
+.entry-quote {
+  font-style: italic;
+}
+
+.entry-list {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.entry-list li {
+  margin: 8px 0;
+  padding-left: 4px;
+  color: var(--mc-body);
+  line-height: 1.7;
+}
+
+/* ---------- Cards (skills / languages / interests) ---------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  padding: 16px;
+  background: var(--mc-surface);
+  border-left: 3px solid var(--mc-accent);
+  border-radius: var(--mc-radius);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--mc-heading);
+  margin: 0 0 8px;
+}
+
+.card-tags {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--mc-muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .resume {
+    padding: 36px 22px;
+  }
+
+  .header .name {
+    font-size: 32px;
+  }
+
+  .entry-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .entry-date {
+    margin-top: 4px;
+  }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  body {
+    font-size: 11pt;
+  }
+
+  .resume {
+    max-width: none;
+    padding: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .section-title {
+    break-after: avoid-page;
+  }
+
+  .entry,
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  p,
+  li {
+    widows: 3;
+    orphans: 3;
+  }
+}
