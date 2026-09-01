@@ -1,0 +1,467 @@
+/*
+  Enhancv — a JSON Resume theme template
+  Inspired by the visual language of an Enhancv "Double Column" resume export
+  (enhancv.com): a crisp white A4 sheet, a bold uppercase near-black name with
+  a bright azure accent for job titles / employers / meters, heavy black rules
+  under uppercase section headings, a wide experience column beside a narrow
+  sidebar (summary, education, skills, languages), bordered skill "pills" that
+  each carry a short azure proficiency bar, five-dot language level meters, and
+  friendly rounded Rubik typography. Print- and ATS-oriented.
+
+  This file is an original implementation for this project — no code was copied
+  from Enhancv or from any npm theme package.
+*/
+
+:root {
+  --ec-bg: #ffffff;
+  --ec-heading: #1a1a1a;
+  --ec-text: #33383d;
+  --ec-body: #40454a;
+  --ec-muted: #78808a;
+  --ec-accent: #2199e8;
+  --ec-border: #d6d9dd;
+  --ec-rule: #1a1a1a;
+  --ec-dot-off: #d6d9dd;
+  --ec-avatar-bg: #edf0f2;
+
+  --ec-max-width: 860px;
+  --ec-gutter: 44px;
+  --ec-col-gap: 40px;
+  --ec-radius: 3px;
+
+  --ec-icon-phone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%232199e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z'/%3E%3C/svg%3E");
+  --ec-icon-mail: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%232199e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E");
+  --ec-icon-pin: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%232199e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+  --ec-icon-web: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%232199e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E");
+  --ec-icon-calendar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2378808a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ec-bg);
+  color: var(--ec-text);
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.resume {
+  max-width: var(--ec-max-width);
+  margin: 0 auto;
+  padding: 52px var(--ec-gutter);
+}
+
+a {
+  color: var(--ec-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 28px;
+  margin-bottom: 34px;
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 33px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  color: var(--ec-heading);
+  margin: 0 0 5px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ec-accent);
+  margin: 0;
+}
+
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12.5px;
+  color: var(--ec-body);
+}
+
+.contact-list li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.contact-list li::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  margin-right: 7px;
+  flex: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.contact-list li.c-phone::before { background-image: var(--ec-icon-phone); }
+.contact-list li.c-mail::before  { background-image: var(--ec-icon-mail); }
+.contact-list li.c-loc::before   { background-image: var(--ec-icon-pin); }
+.contact-list li.c-web::before   { background-image: var(--ec-icon-web); }
+
+.contact-list a,
+.contact-list span {
+  color: var(--ec-body);
+}
+
+.contact-list a:hover {
+  color: var(--ec-accent);
+}
+
+.profile-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+.profile-list a {
+  color: var(--ec-accent);
+}
+
+.avatar {
+  flex: none;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+  background: var(--ec-avatar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--ec-muted);
+}
+
+/* ---------- Two-column body ---------- */
+
+.body-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
+  gap: 0 var(--ec-col-gap);
+  align-items: start;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ec-heading);
+  margin: 0 0 14px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--ec-rule);
+}
+
+/* ---------- Entries (experience / projects / volunteer / education / ...) ---------- */
+
+.entry {
+  margin-bottom: 16px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+/* Dashed separator between narrative entries, main column only. */
+.main-col .entry:not(:last-child) {
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--ec-border);
+}
+
+.side-col .entry:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+.entry-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ec-heading);
+  margin: 0;
+}
+
+.entry-title a {
+  color: inherit;
+}
+
+.entry-org {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ec-accent);
+  margin-top: 3px;
+}
+
+.entry-date {
+  display: flex;
+  align-items: center;
+  font-size: 11.5px;
+  color: var(--ec-muted);
+  margin-top: 5px;
+}
+
+.entry-date::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  flex: none;
+  background: var(--ec-icon-calendar) center / contain no-repeat;
+}
+
+.entry-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ec-body);
+  margin: 8px 0 0;
+}
+
+.entry-list {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  list-style: none;
+}
+
+.entry-list li {
+  position: relative;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ec-body);
+  margin: 4px 0;
+}
+
+.entry-list li::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ec-muted);
+}
+
+.entry--compact .entry-desc {
+  margin-top: 6px;
+}
+
+/* ---------- Summary ---------- */
+
+.summary-text {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ec-body);
+  margin: 0;
+}
+
+/* ---------- Skills (bordered pills with an azure proficiency bar) ---------- */
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-pill {
+  position: relative;
+  font-size: 11.5px;
+  line-height: 1.2;
+  color: var(--ec-text);
+  padding: 5px 10px 6px;
+  border: 1px solid var(--ec-border);
+  border-radius: var(--ec-radius);
+  background: #fff;
+}
+
+.skill-pill::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  bottom: -1px;
+  height: 2px;
+  width: 55%;
+  background: var(--ec-accent);
+  border-bottom-left-radius: var(--ec-radius);
+}
+
+.skill-pill:nth-child(4n)::after   { width: 82%; }
+.skill-pill:nth-child(4n+1)::after { width: 45%; }
+.skill-pill:nth-child(4n+2)::after { width: 68%; }
+.skill-pill:nth-child(4n+3)::after { width: 33%; }
+
+/* ---------- Interests (plain bordered pills) ---------- */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  font-size: 11.5px;
+  line-height: 1.2;
+  color: var(--ec-text);
+  padding: 5px 10px;
+  border: 1px solid var(--ec-border);
+  border-radius: var(--ec-radius);
+}
+
+/* ---------- Languages (five-dot level meter) ---------- */
+
+.lang-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.lang-entry:last-child {
+  margin-bottom: 0;
+}
+
+.lang-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ec-heading);
+}
+
+.lang-fluency {
+  font-size: 11px;
+  color: var(--ec-muted);
+  margin-top: 2px;
+}
+
+.lang-level {
+  display: flex;
+  gap: 4px;
+  flex: none;
+}
+
+.lang-level .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ec-dot-off);
+}
+
+.lang-level .dot--on {
+  background: var(--ec-accent);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 680px) {
+  .resume {
+    padding: 32px 22px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .name {
+    font-size: 27px;
+  }
+
+  .body-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .side-col {
+    margin-top: 26px;
+  }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  body {
+    font-size: 12px;
+  }
+
+  .resume {
+    max-width: none;
+    padding: 0 40px;
+  }
+
+  a,
+  .contact-list a,
+  .profile-list a {
+    color: inherit;
+  }
+
+  .section-title {
+    break-after: avoid-page;
+  }
+
+  .entry,
+  .lang-entry {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

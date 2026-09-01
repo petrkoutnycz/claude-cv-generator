@@ -88,7 +88,7 @@ conventions already established in this repo (see the californian-warm example):
   reference screenshot.
 - **Cover the JSON Resume schema sections** — header/basics (name, title, summary,
   email, phone, website, location, profiles), work, education, skills, projects, awards,
-  certificates, publications, languages, interests, references, volunteer — but weight
+  certificates, publications, languages, interests, volunteer — but weight
   and style them the way the source theme does. A sidebar theme should get a sidebar; a
   single-column card theme should stay single-column; a timeline theme should render a
   timeline. Match its visual identity, not just its section list.

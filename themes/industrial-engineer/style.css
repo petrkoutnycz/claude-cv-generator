@@ -187,7 +187,7 @@ body {
   text-decoration: underline;
 }
 
-/* ---------- Note box (summary / reference quotes) ---------- */
+/* ---------- Note box (summary) ---------- */
 
 .note-box {
   position: relative;
@@ -216,10 +216,6 @@ body {
   color: var(--ie-slate);
   font-size: 14px;
   line-height: 1.7;
-}
-
-.note-box .quote {
-  font-style: italic;
 }
 
 /* ---------- Sections ---------- */

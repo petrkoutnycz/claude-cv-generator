@@ -317,23 +317,6 @@ body {
   border-radius: var(--pmc-radius-sm);
 }
 
-/* ---------- Quote / references ---------- */
-
-.quote {
-  font-size: 13.5px;
-  line-height: 1.7;
-  font-style: italic;
-  color: var(--pmc-text-secondary);
-  margin: 0;
-}
-
-.quote-author {
-  margin-top: 10px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--pmc-text);
-}
-
 /* ---------- Responsive ---------- */
 
 @media (max-width: 640px) {
@@ -379,9 +362,19 @@ body {
     page-break-inside: avoid;
     break-inside: avoid;
     padding: 14px 0;
+    /* No card background in print, so the divider plus this symmetric top/bottom
+       padding carries the separation — the base 16px gutter would only add space
+       above the next title, making entries look lopsided. */
+    margin-bottom: 0;
     border: none;
     border-bottom: 1px solid var(--pmc-border);
     border-radius: 0;
+  }
+
+  /* Sit the first entry close to the section heading rather than a full card's
+     padding below it. */
+  .entry-card:first-of-type {
+    padding-top: 4px;
   }
 
   .entry-card:last-child {

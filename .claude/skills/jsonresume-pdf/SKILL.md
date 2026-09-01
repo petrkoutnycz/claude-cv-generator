@@ -40,8 +40,8 @@ created, just in reverse.
 Rules to follow while populating:
 
 - **One entry block per array item.** For each repeatable section (work, education, skills,
-  projects, awards, certificates, publications, languages, interests, references,
-  volunteer), use the template's example `.entry`/`.entry-card` block as the markup pattern
+  projects, awards, certificates, publications, languages, interests, volunteer), use the
+  template's example `.entry`/`.entry-card` block as the markup pattern
   and repeat it once per item in the corresponding JSON array — not just for however many
   example blocks the template happened to show.
 - **Drop empty sections entirely.** If the resume JSON has no data for a section (missing or

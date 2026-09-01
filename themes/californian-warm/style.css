@@ -291,7 +291,7 @@ body {
   box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
 }
 
-/* ---------- Simple cards (awards / interests / references / certificates) ---------- */
+/* ---------- Simple cards (awards / interests / certificates) ---------- */
 
 .simple-grid {
   display: flex;
@@ -318,18 +318,6 @@ body {
   margin: 6px 0 0;
   color: var(--cw-amber-brown);
   line-height: 1.6;
-}
-
-.simple-card .quote {
-  font-style: italic;
-  color: var(--cw-text-body);
-}
-
-.simple-card .quote-author {
-  margin-top: 12px;
-  font-weight: 700;
-  color: var(--cw-amber);
-  font-style: normal;
 }
 
 /* ---------- Responsive ---------- */

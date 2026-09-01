@@ -1,0 +1,357 @@
+/*
+  New York Editorial — a JSON Resume theme template
+  Inspired by the visual language of the "new-york-editorial" theme on the
+  JSON Resume registry (registry.jsonresume.org): magazine-quality editorial
+  polish built on a narrow single centered column, a high-contrast serif
+  masthead name, italic serif sub-headings, Helvetica-style sans-serif running
+  text, a muted editorial-red accent for links / section rules / list marks,
+  and a heavy black rule closing the header. Inspired by The Atlantic.
+
+  This file is an original implementation for this project — no code was copied
+  from that theme's package.
+*/
+
+:root {
+  --nye-bg: #ffffff;
+  --nye-ink: #1a1a1a;
+  --nye-ink-soft: #333333;
+  --nye-muted: #6b6b6b;
+  --nye-accent: #9e2b25;
+  --nye-accent-dark: #7f231e;
+  --nye-rule: #dcdcdc;
+
+  --nye-font-display: 'Playfair Display', Cambria, Georgia, 'Times New Roman', serif;
+  --nye-font-serif: 'Source Serif 4', Cambria, Georgia, 'Times New Roman', serif;
+  --nye-font-sans: 'Helvetica Neue', Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --nye-measure: 42rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--nye-bg);
+  color: var(--nye-ink-soft);
+  font-family: var(--nye-font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--nye-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--nye-accent-dark);
+  text-decoration: underline;
+}
+
+.resume {
+  max-width: var(--nye-measure);
+  margin: 0 auto;
+  padding: 4.5rem 3.5rem;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  text-align: center;
+  padding-bottom: 2.4rem;
+  margin-bottom: 2.6rem;
+  border-bottom: 3px solid var(--nye-ink);
+}
+
+.name {
+  font-family: var(--nye-font-display);
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--nye-ink);
+  margin: 0;
+}
+
+.title {
+  font-family: var(--nye-font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--nye-muted);
+  margin-top: 0.5rem;
+}
+
+.contact-list,
+.profile-list {
+  list-style: none;
+  margin: 1.3rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.7rem;
+  font-size: 0.875rem;
+}
+
+.profile-list {
+  margin-top: 0.5rem;
+}
+
+.contact-list li:not(:last-child)::after,
+.profile-list li:not(:last-child)::after {
+  content: '\2022';
+  margin-left: 0.7rem;
+  color: var(--nye-accent);
+}
+
+.contact-list span {
+  color: var(--nye-muted);
+}
+
+.summary {
+  font-family: var(--nye-font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--nye-ink-soft);
+  text-align: left;
+  border-left: 3px solid var(--nye-accent);
+  padding-left: 1.1rem;
+  margin: 1.8rem 0 0;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  margin-bottom: 2.6rem;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  position: relative;
+  font-family: var(--nye-font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--nye-ink);
+  margin: 0 0 1.6rem;
+  padding-bottom: 0.7rem;
+}
+
+/* full-width hairline, then a short editorial-red segment painted over its left end */
+.section-title::before,
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+}
+
+.section-title::before {
+  width: 100%;
+  background: var(--nye-rule);
+}
+
+.section-title::after {
+  width: 3.5rem;
+  background: var(--nye-accent);
+}
+
+/* ---------- Entries (experience / education / projects / …) ---------- */
+
+.entry {
+  margin-bottom: 1.8rem;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry-title {
+  font-family: var(--nye-font-serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--nye-ink);
+  margin: 0;
+}
+
+.entry-title a {
+  color: inherit;
+}
+
+.entry-title a:hover {
+  color: var(--nye-accent);
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  margin-top: 0.15rem;
+}
+
+.entry-subtitle {
+  font-family: var(--nye-font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--nye-muted);
+}
+
+.entry-date {
+  font-size: 0.8rem;
+  color: var(--nye-muted);
+  white-space: nowrap;
+}
+
+.entry-desc {
+  margin: 0.7rem 0 0;
+}
+
+.entry-list {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+.entry-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.entry-list li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--nye-accent);
+}
+
+.entry-keywords {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--nye-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Definition list (skills / interests) ---------- */
+
+.def-list {
+  border-top: 1px solid var(--nye-rule);
+}
+
+.def-row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 11rem) 1fr;
+  gap: 0 1.5rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--nye-rule);
+}
+
+.def-term {
+  font-family: var(--nye-font-serif);
+  font-weight: 600;
+  color: var(--nye-ink);
+}
+
+.def-desc {
+  color: var(--nye-ink-soft);
+}
+
+/* ---------- Inline list (languages) ---------- */
+
+.inline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.7rem;
+}
+
+.inline-list li:not(:last-child)::after {
+  content: '\2022';
+  margin-left: 0.7rem;
+  color: var(--nye-accent);
+}
+
+.muted {
+  color: var(--nye-muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 40rem) {
+  .resume {
+    padding: 2.75rem 1.4rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.05rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .entry-head {
+    gap: 0.1rem 0;
+  }
+
+  .def-row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem 0;
+  }
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  body {
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 10.5pt;
+  }
+
+  .resume {
+    max-width: none;
+    padding: 0 2.5rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .section {
+    margin-bottom: 1.6rem;
+  }
+
+  .section-title {
+    break-after: avoid-page;
+  }
+
+  .entry,
+  .reference,
+  .def-row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
