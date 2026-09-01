@@ -297,27 +297,7 @@ body {
   margin-top: 12px;
 }
 
-/* ---------- Skills ---------- */
-
-.skill-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.skill-group {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 12px;
-  align-items: start;
-}
-
-.skill-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--pmc-text-muted);
-  padding-top: 5px;
-}
+/* ---------- Skills / tags ---------- */
 
 .tag-list {
   display: flex;
@@ -369,15 +349,6 @@ body {
     flex-direction: column;
     gap: 2px;
   }
-
-  .skill-group {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .skill-label {
-    padding-top: 0;
-  }
 }
 
 /* ---------- Print ---------- */
@@ -390,7 +361,9 @@ body {
 
   .resume {
     max-width: none;
-    padding: 0;
+    /* The PDF renderer supplies 15 mm top/bottom page margins on every page,
+       so the column only needs a comfortable side gutter here. */
+    padding: 0 72px;
   }
 
   .section {

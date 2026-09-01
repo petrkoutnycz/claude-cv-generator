@@ -285,6 +285,10 @@ a:hover {
     color: #191e23;
   }
 
+  .resume {
+    padding: 0 1.5em;
+  }
+
   .section-title {
     break-after: avoid-page;
   }

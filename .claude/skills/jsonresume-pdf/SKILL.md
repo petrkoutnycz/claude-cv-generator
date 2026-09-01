@@ -126,7 +126,9 @@ node .claude/skills/jsonresume-pdf/scripts/html_to_pdf.js <path-to-populated-htm
 ```
 
 This launches headless Chromium, loads the HTML by `file://` URL, and prints it to A4 with
-`printBackground: true` and zero margins (the themes are designed edge-to-edge).
+`printBackground: true`, 15 mm top/bottom page margins (so content clears the paper edge on
+every page, including interior page breaks), and zero left/right margins — each theme owns
+its horizontal gutter via the print-mode `.resume` padding.
 
 ### 5. Report
 

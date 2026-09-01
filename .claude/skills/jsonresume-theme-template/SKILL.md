@@ -99,7 +99,10 @@ conventions already established in this repo (see the californian-warm example):
 - **Matching web font**: if the reference uses a distinctive typeface, pull the closest
   Google Fonts equivalent via a `<link>` tag (same pattern as the existing example).
 - **Responsive + print**: include a mobile breakpoint and a `@media print` block, same
-  as the existing example.
+  as the existing example. In the print block, the top-level `.resume` wrapper should
+  carry only horizontal padding — the PDF renderer supplies the top/bottom page margins
+  on every page, so re-adding a large `.resume` top padding just makes page 1 sit lower
+  than the pages after it.
 
 ### 4. Sanity check
 

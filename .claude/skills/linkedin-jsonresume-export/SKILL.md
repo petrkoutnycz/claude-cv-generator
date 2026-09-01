@@ -42,61 +42,36 @@ scraping, and not LinkedIn's general-purpose "Sign In / Share" APIs.
 3. Only members located in the **EU/EEA or Switzerland** can consent to share their data
    this way — this is a LinkedIn platform restriction, not a limitation of the script.
 
-## Usage
+## Process
+
+### 1. Make the access token available
+
+Before running, make sure `LINKEDIN_ACCESS_TOKEN` is set — in the repo-root `.env` file
+or exported in the shell (see **Prerequisites** above for how to obtain and provide it).
+The script loads `.env` automatically, and an exported shell value takes precedence over
+it. If neither supplies the token, the script fails fast with
+`LINKEDIN_ACCESS_TOKEN is not set` before making any request.
+
+### 2. Fetch the data
+
+Run the script from the repo root:
 
 ```bash
-# Default: fetch the CV-relevant domains and write temp/linkedin_resume.json
 python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py
-
-# Only specific domains
-python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py \
-  --domain PROFILE --domain POSITIONS
-
-# Every documented snapshot domain (slow, includes non-CV data)
-python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py --all-domains
-
-# Custom output path, and also keep the untrimmed raw LinkedIn data
-python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py \
-  --output temp/resume.json --save-raw temp/linkedin_raw.json
-
-# Re-run just the JSON Resume mapping from a previously saved raw dump
-# (no network call — fast iteration while tuning field mappings)
-python3 .claude/skills/linkedin-jsonresume-export/scripts/fetch_linkedin_profile.py \
-  --from-raw temp/linkedin_raw.json --output temp/resume.json
 ```
 
-All output paths (`--output`, `--save-raw`) are created automatically if their directory
-doesn't exist yet, and default to living under `temp/` at the repo root, which is
-gitignored — keeping downloaded LinkedIn data out of the repo root and out of git.
+It fetches the snapshot domains useful for building a CV/resume
+(`PROFILE, POSITIONS, EDUCATION, SKILLS, CERTIFICATIONS, HONORS, LANGUAGES, PROJECTS,
+RECOMMENDATIONS, VOLUNTEERING_EXPERIENCES`) and writes a spec-conformant JSON Resume
+document to `temp/linkedin_resume.json`, creating `temp/` if it doesn't exist yet. That
+folder is gitignored, which keeps downloaded LinkedIn data out of the repo root and out
+of git.
 
-By default the script fetches the domains useful for building a CV/resume:
-`PROFILE, POSITIONS, EDUCATION, SKILLS, CERTIFICATIONS, HONORS, LANGUAGES, PROJECTS,
-RECOMMENDATIONS, VOLUNTEERING_EXPERIENCES`. LinkedIn documents 60+ snapshot domains in
-total (e.g. `CONNECTIONS`, `ADS_CLICKED`, `SEARCHES`) — pass `--all-domains` to fetch
-everything, or repeat `--domain` to pick an exact set.
-
-## Output
-
-The script writes a JSON Resume document (`$schema: https://jsonresume.org/schema`)
-built with a **strict allowlist mapping**: only LinkedIn fields that have a defined home
-in the JSON Resume schema are copied over (e.g. `basics`, `work`, `education`, `skills`,
-`certificates`, `awards`, `languages`, `projects`, `volunteer`, `references`). Anything
-LinkedIn returns that has no JSON Resume equivalent — zip code, geo location, internal
-IDs/URNs, recommendation status metadata, and the entire long tail of non-CV domains — is
-dropped, not stuffed into a custom extension field. If you want the untrimmed data too,
-pass `--save-raw`.
-
-LinkedIn's Member Snapshot API has no profile-photo field, so the script instead checks
-whether a `profile_photo.jpg` file exists at the repo root — this matches the repo's
-convention (see the `jsonresume-pdf` skill) of keeping a manually-maintained photo there
-for themes to pick up. If found, `basics.image` is set to `"profile_photo.jpg"`; if not,
-`basics.image` is left unset rather than pointing at a nonexistent file.
-
-## Post-processing
+### 3. Translate LinkedIn-locale fields to English
 
 LinkedIn reports several fields in the account's own LinkedIn UI locale, not necessarily
 English — the script passes these through unchanged, with no translation logic and no
-LLM API call. After generating the output file, translate each of the following fields
+LLM API call. After the output file is written, translate each of the following fields
 to English yourself (you're the agent running this skill, so no extra API key or
 dependency is needed) and write the corrected values back into the output file:
 
@@ -114,9 +89,27 @@ summaries, descriptions, degree names, project names, etc. — even if it contai
 non-English words; that's the person's own wording, not a LinkedIn UI artifact, and
 translating it would change the resume's actual content.
 
-IMPORTANT: After writing the output file, also check whether `basics.email` and `basics.phone` are
+### 4. Fill in missing contact details
+
+After writing the output file, check whether `basics.email` and `basics.phone` are
 present and non-empty. For any that are missing, ask the member for the value directly
 (don't guess or invent one) and write it into the output file.
+
+## Output
+
+The script writes a JSON Resume document (`$schema: https://jsonresume.org/schema`)
+built with a **strict allowlist mapping**: only LinkedIn fields that have a defined home
+in the JSON Resume schema are copied over (e.g. `basics`, `work`, `education`, `skills`,
+`certificates`, `awards`, `languages`, `projects`, `volunteer`, `references`). Anything
+LinkedIn returns that has no JSON Resume equivalent — zip code, geo location, internal
+IDs/URNs, recommendation status metadata, and the entire long tail of non-CV domains — is
+dropped, not stuffed into a custom extension field.
+
+LinkedIn's Member Snapshot API has no profile-photo field, so the script instead checks
+whether a `profile_photo.jpg` file exists at the repo root — this matches the repo's
+convention (see the `jsonresume-pdf` skill) of keeping a manually-maintained photo there
+for themes to pick up. If found, `basics.image` is set to `"profile_photo.jpg"`; if not,
+`basics.image` is left unset rather than pointing at a nonexistent file.
 
 ## Troubleshooting
 
@@ -138,5 +131,5 @@ present and non-empty. For any that are missing, ask the member for the value di
 ## Security
 
 - The script never prints the access token or the `Authorization` header.
-- Exported profile data is personal data — the default output paths live under `temp/`
+- Exported profile data is personal data — the default output path lives under `temp/`
   at the repo root, which is gitignored. Don't commit real exports.
